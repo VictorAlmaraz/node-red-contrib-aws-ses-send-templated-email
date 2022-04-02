@@ -1,16 +1,16 @@
 {
-  "name": "node-red-contrib-aws-ses-send",
+  "name": "@VictorAlmaraz/node-red-contrib-aws-ses-send-templated-email",
   "version": "0.0.1",
-  "description": "Enable the send of e-mails with AWS contrib",
-  "main": "aws-ses.js",
+  "description": "Enable the send of templated e-mails with AWS contrib",
+  "main": "aws-ses-templated.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/danielterra/node-red-contrib-aws-ses-send.git"
+    "url": "git+https://github.com/VictorAlmaraz/node-red-contrib-aws-ses-send-templated-email.git"
   },
-  "author": "Daniel Terra <daniel_terra@icloud.com> (https://www.linkedin.com/in/danielterra/)",
+  "author": "Victor Almaraz <victor@almaraz.com.br> (https://www.linkedin.com/in/Victor-Almaraz/)",
   "license": "ISC",
   "keywords": [
     "node-red",
@@ -19,12 +19,12 @@
     "Simple Email Service"
   ],
   "bugs": {
-    "url": "https://github.com/danielterra/node-red-contrib-aws-ses-send/issues"
+    "url": "https://github.com/VictorAlmaraz/node-red-contrib-aws-ses-send-templated-email/issues"
   },
-  "homepage": "https://github.com/danielterra/node-red-contrib-aws-ses-send",
+  "homepage": "https://github.com/VictorAlmaraz/node-red-contrib-aws-ses-send-templated-email",
   "node-red": {
     "nodes": {
-      "aws-ses": "aws-ses.js"
+      "aws-ses-templated": "aws-ses-templated.js"
     }
   },
   "dependencies": {

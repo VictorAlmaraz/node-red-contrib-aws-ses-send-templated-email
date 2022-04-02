@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    RED.nodes.registerType('aws-ses',{
+    RED.nodes.registerType('aws-ses-templated',{
         category: 'Email',
         color: '#DEBD5C',
         defaults: {
@@ -20,14 +20,14 @@
     });
 </script>
 
-<script type="text/html" data-template-name="aws-ses">
+<script type="text/html" data-template-name="aws-ses-templated">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
     <div class="form-row">
         <label for="node-input-sender"><i class="fa fa-email"></i> Sender</label>
-        <input type="email" id="node-input-sender" placeholder="sender">
+        <input type="text" id="node-input-sender" placeholder="sender">
     </div>
     <div class="form-row">
         <label for="node-input-aws_access_key_id"><i class="fa fa-key"></i> AWS Access Key ID</label>
@@ -43,8 +43,8 @@
     </div>
 </script>
 
-<script type="text/html" data-help-name="aws-ses">
-    <h1>A simple node that send e-mails with AWS Simple Email Service.</h1>
+<script type="text/html" data-help-name="aws-ses-templated">
+    <h1>A simple node that sends templated e-mails with AWS Simple Email Service.</h1>
     <h2>1. Configure the node</h1>
     <p>Double click the node and fill all fields</p>
     <h2>Payload</h2>
@@ -52,12 +52,10 @@
     <dl>
         <dt>payload.recipient</dt>
         <dd>Email address to sendo to, should be valid and accept just one address at time.</dd>
-        <dt>payload.subject</dt>
-        <dd>The email subject, should be short string.</dd>
-        <dt>payload.body_text</dt>
-        <dd>If you want to send a pure text email you should use this property.</dd>
-        <dt>payload.body_html</dt>
-        <dd>The html string to send.</dd>
+        <dt>payload.template</dt>
+        <dd>The template name created on AWS SES.</dd>
+        <dt>payload.templateData</dt>
+        <dd>A list of replacement values to apply to the template in JSON format.</dd>
     </dl>
     <h2>Return</h2>
     <p>It returns an Object with the Id of the email sended</p>

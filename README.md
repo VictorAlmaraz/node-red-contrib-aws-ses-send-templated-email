@@ -1,4 +1,4 @@
-# A simple node that send e-mails with AWS Simple Email Service.
+# A simple node that sends templated e-mails with AWS Simple Email Service.
 
 ## Pre-requisites
 1. You need to have a account on AWS and create a programatic access user on IAM with permission to send e-mail with AWS Simple Email Service.

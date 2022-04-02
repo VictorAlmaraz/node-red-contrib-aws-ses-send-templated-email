@@ -19,7 +19,7 @@ const AWS = require("aws-sdk");
 
 module.exports = function(RED) {
     function AwsSESNode(config) {
-        function sendError(err, node, done) {
+        function sendError(err, node, done, msg) {
             node.warn(err.message);
     
             if (err) {
@@ -50,33 +50,33 @@ module.exports = function(RED) {
             });
             
             if (!AWS) {
-                sendError(new Error("You must configure the node key and secret before using..."),node,done);
+                sendError(new Error("You must configure the node key and secret before using..."),node,done, msg);
                 node.warn("Missing AWS credentials");
                 return;
             }
 
             if (!sender) {
-                sendError(new Error("You must configure the node key and secret before using..."),node,done);
+                sendError(new Error("You must configure the node key and secret before using..."),node,done, msg);
                 return;
             }
 
             if (!msg.payload) {
-                sendError(new Error("Did you forget to send the payload?"),node,done);
+                sendError(new Error("Did you forget to send the payload?"),node,done, msg);
                 return;
             }
 
             if (!msg.payload.recipient) {
-                sendError(new Error("msg.payload.recipient is required"),node,done);
+                sendError(new Error("msg.payload.recipient is required"),node,done, msg);
                 return;
             }
 
-            if (!msg.payload.subject) {
-                sendError(new Error("msg.payload.subject is required"),node,done);
+            if (!msg.payload.template) {
+                sendError(new Error("msg.payload.template is required"),node,done, msg);
                 return;
             }
 
-            if (!msg.payload.body_html && !msg.payload.body_text) {
-                sendError(new Error("You must provide a msg.payload.body_html or msg.payload.body_text"),node,done);
+            if (!msg.payload.templateData) {
+                sendError(new Error("msg.payload.templateData is required"),node,done, msg);
                 return;
             }
 
@@ -91,35 +91,17 @@ module.exports = function(RED) {
                         msg.payload.recipient
                     ],
                 },
-                Message: {
-                    Subject: {
-                        Data: msg.payload.subject,
-                        Charset: charset
-                    },
-                    Body: {}
-                }
+                Template: msg.payload.template,
+                TemplateData: msg.payload.templateData
             };
-            
-            if (msg.payload.body_text) {
-                params.Message.Body.Text = {
-                    Charset: charset,
-                    Data: msg.payload.body_text
-                };
-            }
-            
-            if (msg.payload.body_html) {
-                params.Message.Body.Html = {
-                    Charset: charset,
-                    Data: msg.payload.body_html
-                };
-            }
             
             send = send || function() { node.send.apply(node,arguments) }
             
             var ses = new AWS.SES();
-            ses.sendEmail(params, (function(err, data) {
+            ses.sendTemplatedEmail(params, (function(err, data) {
                 if(err) {
-                    sendError(err,node,done);
+                    this.status({fill:"red",shape:"dot",text: "error"});
+                    sendError(err,node,done, msg);
                 } else {
                     this.status({fill:"green",shape:"dot",text:"sent"});
                     msg.payload = data;
@@ -132,7 +114,7 @@ module.exports = function(RED) {
             
         });
     }
-    RED.nodes.registerType("aws-ses",AwsSESNode, {
+    RED.nodes.registerType("aws-ses-templated",AwsSESNode, {
         credentials: {
             aws_access_key_id: {type:"text"},
             aws_secret_access_key: {type:"password"},
