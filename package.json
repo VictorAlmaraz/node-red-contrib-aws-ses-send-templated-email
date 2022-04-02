@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-aws-ses-send-templated-email",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Enable the send of templated e-mails with AWS contrib",
   "main": "aws-ses-templated.js",
   "scripts": {
