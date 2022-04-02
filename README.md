@@ -1,5 +1,7 @@
 # A simple node that sends templated e-mails with AWS Simple Email Service.
 
+This node is based on [node-red-contrib-aws-ses-send](https://github.com/danielterra/node-red-contrib-aws-ses-send)
+
 ## Pre-requisites
 1. You need to have a account on AWS and create a programatic access user on IAM with permission to send e-mail with AWS Simple Email Service.
 2. You need to follow the steps to configure the SES with a verified domain to send emails.
