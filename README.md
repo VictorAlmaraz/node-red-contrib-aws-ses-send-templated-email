@@ -12,8 +12,8 @@ It expects a payload with these properties;
 
 - payload.recipient: Email address to sendo to, should be valid and accept just one address at time.
 - payload.subject: The email subject, should be short string.
-- payload.body_text: If you want to send a pure text email you should use this property.
-- payload.body_html: The html string to send.
+- payload.template: The template name created on AWS SES.
+- payload.templateData: A list of replacement values to apply to the template (stringified JSON).
 
 ## Return
 It returns an Object with the Id of the email sended
