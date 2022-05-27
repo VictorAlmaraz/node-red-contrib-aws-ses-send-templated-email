@@ -87,13 +87,17 @@ module.exports = function(RED) {
             const params = {
                 Source: sender, 
                 Destination: { 
-                    ToAddresses: [
-                        msg.payload.recipient
-                    ],
                 },
                 Template: msg.payload.template,
                 TemplateData: msg.payload.templateData
             };
+
+            if(msg.payload.recipient)
+                params.Destination.ToAddresses = (Array.isArray(msg.payload.recipient)) ? msg.payload.recipient : [ msg.payload.recipient ];
+            if(msg.payload.cc)
+                params.Destination.CcAddresses = (Array.isArray(msg.payload.cc)) ? msg.payload.cc : [ msg.payload.cc ];
+            if(msg.payload.bcc)
+                params.Destination.BccAddresses = (Array.isArray(msg.payload.bcc)) ? msg.payload.bcc : [ msg.payload.bcc ];
             
             send = send || function() { node.send.apply(node,arguments) }
             
