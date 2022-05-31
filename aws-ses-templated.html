@@ -51,7 +51,11 @@
     <p>It expects a payload with these properties;</p>
     <dl>
         <dt>payload.recipient</dt>
-        <dd>Email address to sendo to, should be valid and accept just one address at time.</dd>
+        <dd>Email address to send to. Accepts one single email address (string) or multiple email addresses (array of strings).</dd>
+        <dt>payload.cc</dt>
+        <dd>Email address to send a carbon copy to. Accepts one single email address (string) or multiple email addresses (array of strings).</dd>
+        <dt>payload.bcc</dt>
+        <dd>Email address to send a blind carbon copy to. Accepts one single email address (string) or multiple email addresses (array of strings).</dd>
         <dt>payload.template</dt>
         <dd>The template name created on AWS SES.</dd>
         <dt>payload.templateData</dt>

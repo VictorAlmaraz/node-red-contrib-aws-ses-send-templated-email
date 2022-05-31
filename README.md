@@ -12,7 +12,9 @@ Double click the node and fill all fields
 ## Payload
 It expects a payload with these properties;
 
-- payload.recipient: Email address to sendo to, should be valid and accept just one address at time.
+- payload.recipient: Email address to send to. Accepts one single email address (string) or multiple email addresses (array of strings).
+- payload.cc: Email address to send a carbon copy to. Accepts one single email address (string) or multiple email addresses (array of strings)
+- payload.bcc: Email address to send a blind carbon copy to. Accepts one single email address (string) or multiple email addresses (array of strings).
 - payload.subject: The email subject, should be short string.
 - payload.template: The template name created on AWS SES.
 - payload.templateData: A list of replacement values to apply to the template (stringified JSON).
